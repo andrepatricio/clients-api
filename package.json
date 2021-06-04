@@ -1,0 +1,24 @@
+{
+  "name": "clients-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand -—no-cache",
+    "test:verbose": "jest --passWithNoTests --runInBand",
+    "test:ci": "npm test -- --coverage",
+    "test:watch": "npm test -- --watchAll"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.27.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "husky": "^6.0.0",
+    "jest": "^27.0.4"
+  }
+}
