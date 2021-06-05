@@ -23,6 +23,7 @@ class CreateProductController {
 
       return OK(result)
     } catch (e) {
+      console.error(e)
       return serverInternal(e)
     }
   }

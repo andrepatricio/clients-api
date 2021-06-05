@@ -1,4 +1,4 @@
-const { OK, badRequest, serverInternal } = require('../helpers/http')
+const { OK, badRequest, serverInternal } = require('../../helpers/http')
 
 class DeleteClientController {
   constructor (deleteClientUseCase) {

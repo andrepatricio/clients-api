@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+const EmailAlreadyUsedError = require('../../../../src/data/error/EmailAlreadyUsedError')
 const CreateClientController = require('../../../../src/presentation/controllers/clients/createClientController')
 describe('Create client controller`s tests', () => {
   const makeUseCaseFake = () => {
@@ -72,5 +73,22 @@ describe('Create client controller`s tests', () => {
 
     expect(result.status).toBe(500)
     expect(result.body).toEqual(new Error())
+  })
+
+  test('Should return 400 when create throws EmailAlreadyUsedError', async () => {
+    const { controller, useCaseFake } = makeSut()
+    const spy = jest.spyOn(useCaseFake, 'create')
+    spy.mockImplementationOnce(() => {
+      throw new EmailAlreadyUsedError()
+    })
+    const result = await controller.handle({
+      body: {
+        name: 'valid name',
+        email: 'valid email'
+      }
+    })
+
+    expect(result.status).toBe(400)
+    expect(result.body).toEqual(new EmailAlreadyUsedError())
   })
 })

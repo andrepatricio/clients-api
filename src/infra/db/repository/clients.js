@@ -2,7 +2,7 @@ const MongoHelper = require('../config/db')
 const { ObjectID } = require('mongodb')
 
 class ClientRepository {
-  async save (client) {
+  async insert (client) {
     const clientsCollection = await MongoHelper.getCollection('clients')
     const result = await clientsCollection.insertOne(client)
     return result
