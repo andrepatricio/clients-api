@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const CreateClientController = require('../../../src/presentation/controllers/createClientController')
+const CreateClientController = require('../../../../src/presentation/controllers/clients/createClientController')
 describe('Create client controller`s tests', () => {
   const makeUseCaseFake = () => {
     class CreateClientUseCaseFake {

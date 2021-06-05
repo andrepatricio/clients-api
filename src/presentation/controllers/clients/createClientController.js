@@ -1,5 +1,5 @@
-const EmailAlreadyUsedError = require('../../data/error/EmailAlreadyUsedError')
-const { badRequest, OK, serverInternal } = require('../helpers/http')
+const EmailAlreadyUsedError = require('../../../data/error/EmailAlreadyUsedError')
+const { badRequest, OK, serverInternal } = require('../../helpers/http')
 
 class CreateClientController {
   constructor (createClientUseCase) {
