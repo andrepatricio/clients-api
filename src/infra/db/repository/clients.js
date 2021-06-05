@@ -20,10 +20,18 @@ class ClientRepository {
     return result
   }
 
-  async find (_id) {
+  async find (query) {
     const clientsCollection = await MongoHelper.getCollection('clients')
-    const result = await clientsCollection.findOne({ _id: new ObjectID(_id) })
+    const result = await clientsCollection.findOne(query)
     return result
+  }
+
+  async findByEmail (email) {
+    return await this.find({ email })
+  }
+
+  async findById (_id) {
+    return await this.find({ _id: new ObjectID(_id) })
   }
 }
 

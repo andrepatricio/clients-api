@@ -1,3 +1,5 @@
+const { OK, badRequest, serverInternal } = require('../helpers/http')
+
 class DeleteClientController {
   constructor (deleteClientUseCase) {
     this.deleteClientUseCase = deleteClientUseCase
@@ -5,11 +7,15 @@ class DeleteClientController {
 
   handle (req) {
     const { id } = req.params
-    const result = this.deleteClientUseCase.delete(id)
+    if (!id) {
+      return badRequest(new Error('Parameter "id" is required'))
+    }
+    try {
+      const result = this.deleteClientUseCase.delete(id)
 
-    return {
-      status: 200,
-      body: result
+      return OK(result)
+    } catch (e) {
+      return serverInternal(e)
     }
   }
 }

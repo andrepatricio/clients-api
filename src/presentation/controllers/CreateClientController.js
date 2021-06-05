@@ -1,3 +1,4 @@
+const EmailAlreadyUsedError = require('../../data/error/EmailAlreadyUsedError')
 const { badRequest, OK, serverInternal } = require('../helpers/http')
 
 class CreateClientController {
@@ -6,7 +7,6 @@ class CreateClientController {
   }
 
   async handle (req) {
-    console.log(req)
     const requiredFields = ['name', 'email']
     const { body } = req
 
@@ -21,6 +21,7 @@ class CreateClientController {
       const result = await this.createClientUseCase.create({ name, email })
       return OK(result)
     } catch (e) {
+      if (e instanceof EmailAlreadyUsedError) { return badRequest(e) }
       return serverInternal(e)
     }
   }
