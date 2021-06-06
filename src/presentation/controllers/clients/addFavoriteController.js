@@ -1,0 +1,22 @@
+const { OK, badRequest, serverInternal } = require('../../helpers/http')
+
+class AddFavoriteController {
+  constructor (addFavoriteUseCase) {
+    this.addFavoriteUseCase = addFavoriteUseCase
+  }
+
+  async handle (req) {
+    const { clientId, productId } = req.params
+    try {
+      const result = await this.addFavoriteUseCase.add(clientId, productId)
+      return OK(result)
+    } catch (e) {
+      if (e.name === 'ProductAlreadyFavorite' || e.name === 'ProductNotFoundError') {
+        return badRequest(e.message)
+      }
+      return serverInternal(e)
+    }
+  }
+}
+
+module.exports = AddFavoriteController

@@ -3,9 +3,8 @@ class GetAllProductsUseCase {
     this.productRepository = productRepository
   }
 
-  async getAll ({ page = 1, limit = 3 }) {
-    const result = await this.productRepository.findAll({ page, limit })
-    return result
+  async getAll ({ page = 1, limit = 10 }) {
+    return await this.productRepository.findAll({ page, limit })
   }
 }
 

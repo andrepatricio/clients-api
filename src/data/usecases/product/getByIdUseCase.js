@@ -4,8 +4,7 @@ class GetByIdUseCase {
   }
 
   async get (_id) {
-    const result = await this.productRepository.findById(_id)
-    return result
+    return await this.productRepository.findById(_id)
   }
 }
 

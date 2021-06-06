@@ -24,7 +24,6 @@ describe('Create client controller`s tests', () => {
         email: 'valid email'
       }
     })
-    console.log(response)
 
     expect(response.status).toBe(400)
     expect(response.body).toEqual(new Error('Parameter "name" is required'))

@@ -1,37 +1,34 @@
-const MongoHelper = require('../config/db')
-const { ObjectID } = require('mongodb')
+const ClientModel = require('../models/client')
+const mongoose = require('mongoose')
+const InvalidObjectIdError = require('../error/InvalidObjectIdError')
 
 class ClientRepository {
-  async insert (client) {
-    const clientsCollection = await MongoHelper.getCollection('clients')
-    const result = await clientsCollection.insertOne(client)
-    return result
+  async insert ({ name, email }) {
+    const client = await ClientModel.create({ name, email })
+    return client
+  }
+
+  async save (client) {
+    return await client.save()
   }
 
   async delete (_id) {
-    const clientsCollection = await MongoHelper.getCollection('clients')
-    const result = await clientsCollection.deleteOne({ _id: new ObjectID(_id) })
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+      throw new InvalidObjectIdError()
+    }
+    const result = await ClientModel.findOneAndDelete({ _id })
     return result
-  }
-
-  async findAll () {
-    const clientsCollection = await MongoHelper.getCollection('clients')
-    const result = await clientsCollection.findAll()
-    return result
-  }
-
-  async find (query) {
-    const clientsCollection = await MongoHelper.getCollection('clients')
-    const result = await clientsCollection.findOne(query)
-    return result
-  }
-
-  async findByEmail (email) {
-    return await this.find({ email })
   }
 
   async findById (_id) {
-    return await this.find({ _id: new ObjectID(_id) })
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+      throw new InvalidObjectIdError()
+    }
+    return await ClientModel.findOne({ _id }).populate('favorites').exec()
+  }
+
+  async findOne (query) {
+    return await ClientModel.findOne(query).exec()
   }
 }
 

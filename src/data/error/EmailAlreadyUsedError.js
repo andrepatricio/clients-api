@@ -1,7 +1,7 @@
 class EmailAlreadyUsedError extends Error {
   constructor (msg) {
     super(msg)
-    this.name = EmailAlreadyUsedError
+    this.name = 'EmailAlreadyUsedError'
   }
 }
 
