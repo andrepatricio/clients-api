@@ -1,4 +1,4 @@
-const { OK, badRequest, serverInternal, unauthorized } = require('../../helpers/http')
+const { OK, badRequest, serverInternal, unauthorized, notFound } = require('../../helpers/http')
 
 class AddFavoriteController {
   constructor (addFavoriteUseCase) {
@@ -15,8 +15,11 @@ class AddFavoriteController {
       const result = await this.addFavoriteUseCase.add(clientId, productId)
       return OK(result)
     } catch (e) {
-      if (e.name === 'ProductAlreadyFavorite' || e.name === 'ProductNotFoundError') {
+      if (e.name === 'ProductAlreadyFavoriteError') {
         return badRequest(e.message)
+      }
+      if (e.name === 'ProductNotFoundError') {
+        return notFound('product', productId)
       }
       return serverInternal(e)
     }
