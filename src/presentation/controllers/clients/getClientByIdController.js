@@ -1,4 +1,4 @@
-const InvalidObjectIdError = require('../../../infra/db/error/InvalidObjectIdError')
+
 const { notFound, OK, badRequest, serverInternal } = require('../../helpers/http')
 
 class GetClientByIdController {
@@ -15,11 +15,10 @@ class GetClientByIdController {
       }
       return OK(result)
     } catch (e) {
-      if (e instanceof InvalidObjectIdError) {
+      if (e.name === 'InvalidObjectIdError') {
         return badRequest(e.message)
       }
-      console.error(e)
-      serverInternal(e)
+      return serverInternal(e)
     }
   }
 }
