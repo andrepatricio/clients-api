@@ -88,6 +88,6 @@ describe('Create client controller`s tests', () => {
     })
 
     expect(result.status).toBe(400)
-    expect(result.body).toEqual(new EmailAlreadyUsedError())
+    expect(result.body).toBe('This email undefined is already used')
   })
 })

@@ -23,7 +23,7 @@ class CreateClientController {
     } catch (e) {
       console.error(e)
       if (e instanceof EmailAlreadyUsedError) { return badRequest(e.message) }
-      return serverInternal('Server internal error, sorry for that!')
+      return serverInternal(e)
     }
   }
 }

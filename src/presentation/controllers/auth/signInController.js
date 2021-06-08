@@ -1,4 +1,4 @@
-const { badRequest, OK, unauthorized } = require('../../helpers/http')
+const { badRequest, OK, unauthorized, serverInternal } = require('../../helpers/http')
 
 class SignInController {
   constructor (signInUseCase) {
@@ -14,7 +14,8 @@ class SignInController {
       const accessToken = await this.signInUseCase.signIn(email)
       return OK({ accessToken })
     } catch (e) {
-      return unauthorized()
+      if (e.name === 'EmailNotFoundError') { return unauthorized() }
+      return serverInternal(e)
     }
   }
 }

@@ -5,6 +5,6 @@ const makeSignInController = require('../factories/controllers/signInFactory')
 
 const router = Router()
 
-router.post('/signIn', adaptRoute(makeSignInController()))
+router.post('/signin', adaptRoute(makeSignInController()))
 
 module.exports = router

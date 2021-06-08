@@ -1,3 +1,4 @@
+require('dotenv').config()
 const { server } = require('./environment')
 const app = require('./config/app')
 require('../infra/db/config/db')
