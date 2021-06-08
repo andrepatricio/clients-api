@@ -7,14 +7,14 @@ class DeleteClientController {
 
   handle (req) {
     const { id } = req.params
-    if (!id) {
-      return badRequest(new Error('Parameter "id" is required'))
-    }
     try {
       const result = this.deleteClientUseCase.delete(id)
 
       return OK(result)
     } catch (e) {
+      if (e.name === 'InvalidObjectIdError') {
+        return badRequest(e.message)
+      }
       return serverInternal(e)
     }
   }

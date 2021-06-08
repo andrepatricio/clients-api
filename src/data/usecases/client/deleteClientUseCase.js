@@ -4,12 +4,7 @@ class DeleteClientUseCase {
   }
 
   async delete (id) {
-    try {
-      const result = await this.repository.delete(id)
-      return result
-    } catch (e) {
-      console.error(e)
-    }
+    return await this.repository.delete(id)
   }
 }
 
