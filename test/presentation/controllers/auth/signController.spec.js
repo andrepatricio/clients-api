@@ -64,4 +64,17 @@ describe('SignIn controllers tests', () => {
 
     expect(response.status).toBe(500)
   })
+
+  test('Should return 200 if all is correct', async () => {
+    const { controller } = makeController()
+    const request = {
+      body: {
+        email: 'valid email'
+      }
+    }
+    const response = await controller.handle(request)
+
+    expect(response.status).toBe(200)
+    expect(response.body.accessToken).toBe('valid token')
+  })
 })
