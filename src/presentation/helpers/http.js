@@ -18,9 +18,20 @@ const OK = (body) => ({
   body
 })
 
+const forbidden = (e) => ({
+  status: 403,
+  body: e
+})
+
+const unauthorized = () => ({
+  status: 401
+})
+
 module.exports = {
   badRequest,
   OK,
   serverInternal,
-  notFound
+  notFound,
+  forbidden,
+  unauthorized
 }

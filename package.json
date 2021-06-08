@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node src/main/server",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand -—no-cache",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:ci": "npm test -- --coverage",
@@ -24,7 +25,7 @@
   "dependencies": {
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongodb": "^3.6.9",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.13"
   }
 }

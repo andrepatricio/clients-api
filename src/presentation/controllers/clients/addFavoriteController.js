@@ -1,4 +1,4 @@
-const { OK, badRequest, serverInternal } = require('../../helpers/http')
+const { OK, badRequest, serverInternal, unauthorized } = require('../../helpers/http')
 
 class AddFavoriteController {
   constructor (addFavoriteUseCase) {
@@ -7,6 +7,10 @@ class AddFavoriteController {
 
   async handle (req) {
     const { clientId, productId } = req.params
+    const { user } = req
+    if (user !== clientId) {
+      return unauthorized()
+    }
     try {
       const result = await this.addFavoriteUseCase.add(clientId, productId)
       return OK(result)

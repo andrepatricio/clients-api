@@ -4,8 +4,7 @@ class CreateProductUseCase {
   }
 
   async create (product) {
-    const result = await this.productRepository.insert(product)
-    return result.ops[0]
+    return await this.productRepository.insert(product)
   }
 }
 

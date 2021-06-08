@@ -21,9 +21,9 @@ class CreateClientController {
       const result = await this.createClientUseCase.create({ name, email })
       return OK(result)
     } catch (e) {
-      console.log(e)
-      if (e instanceof EmailAlreadyUsedError) { return badRequest(e) }
-      return serverInternal(e)
+      console.error(e)
+      if (e instanceof EmailAlreadyUsedError) { return badRequest(e.message) }
+      return serverInternal('Server internal error, sorry for that!')
     }
   }
 }

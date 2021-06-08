@@ -6,6 +6,6 @@ const ClientSchema = new mongoose.Schema({
   favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'products' }]
 })
 
-const ClientModel = mongoose.model('favorites', ClientSchema)
+const ClientModel = mongoose.model('clients', ClientSchema)
 
 module.exports = ClientModel

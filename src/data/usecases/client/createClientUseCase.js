@@ -1,4 +1,4 @@
-// const EmailAlreadyUsedError = require('../../error/EmailAlreadyUsedError')
+const EmailAlreadyUsedError = require('../../error/EmailAlreadyUsedError')
 
 class CreateClientUseCase {
   constructor (repository) {
@@ -6,10 +6,10 @@ class CreateClientUseCase {
   }
 
   async create ({ name, email }) {
-    // const client = await this.repository.findByEmail(email)
-    // if (client) {
-    //   throw new EmailAlreadyUsedError(`This email, ${email}, already used`)
-    // }
+    const client = await this.repository.findOne({ email })
+    if (client) {
+      throw new EmailAlreadyUsedError(email)
+    }
     const result = await this.repository.insert({ name, email })
     return result
   }

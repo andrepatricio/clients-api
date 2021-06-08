@@ -1,4 +1,4 @@
-const { server } = require('./environment/envs')
+const { server } = require('./environment')
 const app = require('./config/app')
 require('../infra/db/config/db')
 

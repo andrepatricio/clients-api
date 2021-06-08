@@ -3,7 +3,8 @@ const adaptRoute = (controller) => {
     const request = {
       body: req.body,
       params: req.params,
-      query: req.query
+      query: req.query,
+      user: req.clientId
     }
     const httpResponse = await controller.handle(request)
     if (httpResponse.status >= 200 && httpResponse.status <= 299) {
