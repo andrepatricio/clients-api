@@ -25,4 +25,5 @@ Configuração padrão nesse caso é:
 | `POST`   | `/client/{id}/favorite/{productId}`    |
 | `POST`   | `/product`                             |
 | `GET`    | `/product`                             |
-| `GET`    | `/auth/signin}`                        |
+| `GET`    | `/product/{id}`                        |
+| `POST`   | `/auth/signin`                         |
