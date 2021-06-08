@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+    clientsapi:
+        build: .
+        container_name: clientsAPI
+        depends_on: 
+            - mongodb
+        environment:
+            - DB_MONGO_URI=mongodb://andre:andre@mongodb:27017/clients
+        ports:
+            - 3000:3000
+        networks:
+            - clientsnetworks
+    mongodb:
+        image: mongo:latest
+        container_name: clientsMongo
+        restart: always
+        environment:
+            - MONGO_INITDB_DATABASE=clients
+        ports:
+            - 27017:27017
+        networks:
+            - clientsnetworks
+        volumes:
+            - ./database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+networks:
+    clientsnetworks:
+        driver: bridge
